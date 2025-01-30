@@ -25,3 +25,21 @@ function playRound (computerChoice, humanChoice) {
 }
 
 
+function playGame() {
+
+    for (let i = 0; i < 5; i++) {    
+        let computerChoice = CHOICES[getComputerChoice()];
+        let humanChoice = getHumanChoice();
+        playRound(computerChoice, humanChoice);
+    }
+
+    if (humanScore > computerScore) {
+        console.log("You win!");
+    } else {
+        console.log("You lose!");
+    }
+
+    console.log(`Score\nYou: ${humanScore}\nComputer:${computerScore}`);
+}
+
+playGame();
