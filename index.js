@@ -13,6 +13,10 @@ let computerScore = 0;
 
 function playRound (computerChoice, humanChoice) {
 
+    if (humanChoice == computerChoice) {
+        return;
+    }
+
     if (humanChoice == CHOICES[0] && computerChoice == CHOICES[2]) {
         humanScore++;
     } else if (humanChoice == CHOICES[1] && computerChoice == CHOICES[0]) {
@@ -25,13 +29,22 @@ function playRound (computerChoice, humanChoice) {
 }
 
 let buttons = document.querySelectorAll(".btn");
+let container = document.querySelector("#result");
 
 let humanSelection = "";
 
 buttons.forEach(button => {
-    button.addEventListener("click", () => {
-        humanSelection = button.textContent;
-        console.log(button.textContent + " clicked!");
+    button.addEventListener("click", (e) => {
+        humanSelection = e.target.textContent.toLowerCase();
+        let computerSelection = CHOICES[getComputerChoice()];
+
+        playRound(computerSelection, humanSelection);
+
+        container.innerHTML = humanSelection + " vs " + computerSelection
+        + "<br>Score"
+        + "<br>You: " + humanScore
+        + "<br>Computer: " + computerScore;
+
     })
 });
 
